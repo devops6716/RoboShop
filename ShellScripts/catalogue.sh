@@ -39,13 +39,14 @@ VALIDATE $? "enabled nodejs"
 dnf install nodejs -y &>> $LOG_FILE
 VALIDATE $? "installing nodejs"
 
-id roboshop
+id roboshop &>> $LOG_FILE
 if [ id -ne 0 ]
 then
     useradd roboshop &>> $LOG_FILE
     VALIDATE $? "User creation"
 else 
-    echo "user already exist so $Y skipping $N     
+    echo "user already exist so $Y skipping $N "
+fi       
 
 mkdir -p /app
 VALIDATE $? "app directory creation"
