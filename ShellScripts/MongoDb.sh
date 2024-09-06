@@ -30,7 +30,7 @@ fi
 
 yum list installed | grep -q "mongo"
 
-if [ $? -eq 0 ]
+if [ $? -ne 0 ]
 then
 
     ## CAll the mongo.repo file
