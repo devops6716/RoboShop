@@ -31,4 +31,4 @@ fi
 ## CAll the mongo.repo file
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo &>>$LOG_FILE
-VALIDATE() $? "Copied repo file"
+VALIDATE $? "Copied repo file"
