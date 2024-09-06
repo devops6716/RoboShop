@@ -31,29 +31,29 @@ then
 fi    
 
 dnf module disable nodejs -y &>> $LOG_FILE
-Validation $? "disabled nodejs"
+VALIDATEn $? "disabled nodejs"
 
 dnf module enable nodejs:18 -y &>> $LOG_FILE
-Validation $? "enabled nodejs"
+VALIDATE $? "enabled nodejs"
 
 dnf install nodejs -y &>> $LOG_FILE
-Validation $? "installing nodejs"
+VALIDATE $? "installing nodejs"
 
 useradd roboshop &>> $LOG_FILE
-Validation $? "User creation"
+VALIDATE $? "User creation"
 
 mkdir /app
-Validation $? "app directory creation"
+VALIDATE $? "app directory creation"
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip  &>> $LOG_FILE
-Validation $? "downloading catalog app"
+VALIDATE $? "downloading catalog app"
 
 cd /app 
 unzip /tmp/catalogue.zip &>> $LOG_FILE
-Validation $? "Unzipping catalog"
+VALIDATE $? "Unzipping catalog"
 
 npm install >> $LOG_FILE
-Validation $? "instaling dependencies"
+VALIDATE $? "instaling dependencies"
 
 cp /home/centos/RoboShop/ShellScripts/catalogue.service /etc/systemd/system/catalogue.service  
 VALIDATE $? " catalogue service config"
