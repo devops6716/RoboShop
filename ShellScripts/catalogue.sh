@@ -39,17 +39,22 @@ VALIDATE $? "enabled nodejs"
 dnf install nodejs -y &>> $LOG_FILE
 VALIDATE $? "installing nodejs"
 
-useradd roboshop &>> $LOG_FILE
-VALIDATE $? "User creation"
+id roboshop
+if [ id -ne 0 ]
+then
+    useradd roboshop &>> $LOG_FILE
+    VALIDATE $? "User creation"
+else 
+    echo "user already exist so $Y skipping $N     
 
-mkdir /app
+mkdir -p /app
 VALIDATE $? "app directory creation"
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip  &>> $LOG_FILE
 VALIDATE $? "downloading catalog app"
 
 cd /app 
-unzip /tmp/catalogue.zip &>> $LOG_FILE
+unzip -o /tmp/catalogue.zip &>> $LOG_FILE
 VALIDATE $? "Unzipping catalog"
 
 npm install >> $LOG_FILE
