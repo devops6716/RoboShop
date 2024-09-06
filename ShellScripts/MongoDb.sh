@@ -25,7 +25,7 @@ VALIDATE()
 if [ $ID -ne 0 ]
 then
     echo -e " $R Error.... Login with root access $N"
-    Exit 1 
+    exit 1 
 fi    
 
 ## CAll the mongo.repo file
