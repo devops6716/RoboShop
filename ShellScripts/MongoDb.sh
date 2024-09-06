@@ -28,22 +28,29 @@ then
     exit 1 
 fi    
 
-## CAll the mongo.repo file
+yum list installed | grep -q "mongo"
 
-cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOG_FILE 
-VALIDATE $? "Copied repo file"
+if [ $? -eq 0 ]
+then
 
-dnf install mongodb-org -y &>>$LOG_FILE
-VALIDATE $? " installing mongodb"
+    ## CAll the mongo.repo file
 
-systemctl enable mongod &>>$LOG_FILE
-VALIDATE $? " enabling mongodb"
+    cp mongo.repo /etc/yum.repos.d/mongo.repo &>> $LOG_FILE 
+    VALIDATE $? "Copied repo file"
 
-systemctl start mongod &>>$LOG_FILE
-VALIDATE $? "mongodb start"
+    dnf install mongodb-org -y &>>$LOG_FILE
+    VALIDATE $? " installing mongodb"
 
-sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOG_FILE
-VALIDATE $? "Update remote to all"
+    systemctl enable mongod &>>$LOG_FILE
+    VALIDATE $? " enabling mongodb"
 
-systemctl restart mongod &>> $LOG_FILE
-VALIDATE $? "mongodb restrt"
+    systemctl start mongod &>>$LOG_FILE
+    VALIDATE $? "mongodb start"
+
+    sed -i 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $LOG_FILE
+    VALIDATE $? "Update remote to all"
+
+    systemctl restart mongod &>> $LOG_FILE
+    VALIDATE $? "mongodb restrt"
+else
+    echo " already installed"     
