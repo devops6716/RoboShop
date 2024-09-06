@@ -31,7 +31,7 @@ then
 fi    
 
 dnf module disable nodejs -y &>> $LOG_FILE
-VALIDATEn $? "disabled nodejs"
+VALIDATE $? "disabled nodejs"
 
 dnf module enable nodejs:18 -y &>> $LOG_FILE
 VALIDATE $? "enabled nodejs"
