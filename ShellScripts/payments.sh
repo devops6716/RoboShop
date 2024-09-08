@@ -27,7 +27,8 @@ if [ $ID -ne 0 ]
 then
     echo -e " $R Error.... Login with root access $N"
     exit 1 
-fi  
+fi 
+dnf install python36 gcc python3-devel -y 
 id roboshop &>> $LOG_FILE
 if [ $? -ne 0 ]
 then
