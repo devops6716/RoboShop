@@ -7,7 +7,7 @@ Y="\e[33m"
 N="\e[0m"
 TIMESTAMP=$(date +%F-%H-%M-%S)
 LOG_FILE="/tmp/$0-$TIMESTAMP.log"
-MONGODB_IP=172.31.37.231
+MYSQL_IP=172.31.25.41
 echo " Script start at $TIMESTAMP" &>> $LOG_FILE
 
 ## Validation function
@@ -65,7 +65,7 @@ dnf install mysql -y &>> $LOG_FILE
 VALIDATE $? "mysql installation"
 
 VALIDATE $? "mysql istarted"
-mysql_secure_installation --set-root-pass RoboShop@1 &>> $LOG_FILE
+mysql -h $MYSQL_IP -uroot -pRoboShop@1 < /app/schema/shipping.sql &>> $LOG_FILE
 VALIDATE $? "mysql root password changed"
 
 VALIDATE $? "restart shipping"
