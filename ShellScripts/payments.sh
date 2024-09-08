@@ -47,7 +47,7 @@ unzip -o /tmp/payment.zip &>> $LOG_FILE
 VALIDATE $? "unzipping payments"
 pip3.6 install -r requirements.txt &>> $LOG_FILE
 VALIDATE $? "Installing dependencies"
-cp cp /home/centos/RoboShop/ShellScripts/payment.service /etc/systemd/system/payment.service
+cp /home/centos/RoboShop/ShellScripts/payment.service /etc/systemd/system/payment.service
 VALIDATE $? " paymentr service config"
 systemctl daemon-reload &>> $LOG_FILE
 VALIDATE $? " daemon reload"
