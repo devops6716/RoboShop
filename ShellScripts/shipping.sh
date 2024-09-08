@@ -63,10 +63,9 @@ VALIDATE $? "start shipping"
 ##VALIDATE $? "mysql config is "
 dnf install mysql -y &>> $LOG_FILE
 VALIDATE $? "mysql installation"
-systemctl enable mysqld &>> $LOG_FILE
-systemctl start mysqld &>> $LOG_FILE
+
 VALIDATE $? "mysql istarted"
 mysql_secure_installation --set-root-pass RoboShop@1 &>> $LOG_FILE
 VALIDATE $? "mysql root password changed"
-systemctl restart mysqld &>> $LOG_FILE
+
 VALIDATE $? "restart shipping"
