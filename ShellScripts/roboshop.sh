@@ -1,7 +1,7 @@
 #!/bin/bash
 
 AMI=ami-0b4f379183e5706b9  #this keeps on changing
-SG_ID=sg-0a56e0a72a00dd14c #replace with your SG ID
+SG_ID="sg-0a56e0a72a00dd14c" #replace with your SG ID
 INSTANCES=("mongodb" "redis" "mysql" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "web")
 ZONE_ID=Z05776752T3BSQOUDSHB4 # replace your zone ID
 DOMAIN_NAME="aws-devops.online"
