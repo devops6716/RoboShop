@@ -4,6 +4,7 @@ AMI="ami-0b4f379183e5706b9"
 SG_ID="sg-004ee40a4b913685e"
 INSTANCES=("mongodb" "mysql" "redis" "rabbitmq" "catalogue" "user" "cart" "shipping" "payment" "dispatch" "web")
 DOMAIN_NAME="aws-devops.online"
+ZONE_ID=Z05776752T3BSQOUDSHB4
 
 for i in "${INSTANCES[@]}"
 do 
