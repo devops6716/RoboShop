@@ -4,7 +4,7 @@
   tasks:
     - name: install python packages
       dnf:
-        name: {{item}}
+        name: "{{item}}"
         state: present
       loop:
         - python36
