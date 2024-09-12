@@ -46,7 +46,7 @@
 
     - name: copy mongo repo 
       ansible.builtin.copy:
-        src: cmongo.repo  
+        src: mongo.repo  
         dest: /etc/yum.repos.d/mongo.repo
 
     - name: install mongodb client
