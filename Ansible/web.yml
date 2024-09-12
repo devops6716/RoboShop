@@ -15,7 +15,7 @@
     - name: download code
       ansible.builtin.get_url: 
         url: curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
-        path: /tmp 
+        dest: /tmp 
 
     - name: unzip web code
       ansible.builtin.unarchive:
