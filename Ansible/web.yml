@@ -1,0 +1,35 @@
+- name: web
+  hosts: web
+  become: true  
+  tasks: 
+    - name: install nginx
+      ansible.builtin.package:
+        name: nginx
+        state: latest
+
+    - name: remove default html content
+      ansible.builtin.file:
+        path: /usr/share/nginx/html/*  
+        state: absent   
+
+    - name: download code
+      ansible.builtin.get_url: 
+        url: curl -o /tmp/web.zip https://roboshop-builds.s3.amazonaws.com/web.zip
+        path: /tmp 
+
+    - name: unzip web code
+      ansible.builtin.unarchive:
+        src: /tmp/web.zip
+        dest: /usr/share/nginx/html
+        remote_src: true
+
+    - name: copy roboshop configuration
+      ansible.builtin.copy:
+        src: roboshop.conf
+        dest: /etc/nginx/default.d/roboshop.conf
+
+    - name: start and enable nginx
+      ansible.builtin.service:
+        name: nginx
+        state: restarted
+        enabled: yes       
