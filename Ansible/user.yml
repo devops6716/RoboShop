@@ -59,7 +59,7 @@
       register: user_count 
 
     - name: load user data
-      ansible.builtin.command: mongo --host mongodb.aws-devops.online < /app/schema/user.js
+      ansible.builtin.shell: mongo --host mongodb.aws-devops.online < /app/schema/user.js
       when: user_count.stdout != "1"
 
 
