@@ -15,7 +15,7 @@ do
         INSTANCE_TYPE="t2.micro"
     fi
 
-    echo " creating $INSTANCES - instance"
+    echo " creating $i - instance"
     # Run the instance
     INSTANCE_ID=$(aws ec2 run-instances \
         --image-id "$AMI" \
