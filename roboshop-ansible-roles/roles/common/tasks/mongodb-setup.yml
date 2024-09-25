@@ -8,12 +8,12 @@
     name: mongodb-org-shell
     state: present
 
-- name: get entries count
+- name: get catalogue count
   ansible.builtin.command: mongo --host mongodb.aws-devops.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: entries_count 
   when: component == "catalogue"
 
-- name: get entries count
+- name: get user count
   ansible.builtin.command: mongo --host mongodb.aws-devops.online --quiet --eval 'db = db.getSiblingDB("user"); db.products.count()'
   register: entries_count 
   when: component == "user"  
