@@ -8,6 +8,11 @@
     name: common
     tasks_from: nodejs
 
+- name: mongodb setup
+  import_role:
+    name: common
+    tasks_from: mongodb-setup
+    
 - name: service start
   import_role:
     name: common
