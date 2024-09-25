@@ -1,0 +1,12 @@
+- name: install mysql client
+  dnf:
+    name: mysql
+    state: present 
+
+- name: check if data is already present in database
+  ansible.builtin.command:  mysql -h {{MYSQL_HOST}} -uroot -p{{mysql_password}} -sN -e "SELECT COUNT(*) FROM INFORMATION_SCHEMA.SCHEMATA WHERE SCHEMA_NAME = 'cities'"
+  register: schema      
+
+- name: load cities data
+  ansible.builtin.shell: "mysql -h {{MYSQL_HOST}} -uroot -p{{mysql_password}}  < /app/schema/shipping.sql"
+  when: schema.stdout != "1"
