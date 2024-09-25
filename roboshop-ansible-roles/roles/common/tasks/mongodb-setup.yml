@@ -18,12 +18,12 @@
   register: users_count 
   when: component == "user"  
 
-- name: "load {{component}} data"
-  ansible.builtin.shell: "mongo --host mongodb.aws-devops.online < /app/schema/{{component}}.js"
+- name: "load catalogue data"
+  ansible.builtin.shell: "mongo --host mongodb.aws-devops.online < /app/schema/catalogue.js"
   when: products_count.stdout == "0" And component == "catalogue"
   ignore_errors: true
 
-- name: "load {{component}} data"
-  ansible.builtin.shell: "mongo --host mongodb.aws-devops.online < /app/schema/{{component}}.js"
+- name: "load user data"
+  ansible.builtin.shell: "mongo --host mongodb.aws-devops.online < /app/schema/user.js"
   when: users_count.stdout == "0"  And component == "user"
   ignore_errors: true
