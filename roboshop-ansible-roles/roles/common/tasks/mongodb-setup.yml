@@ -9,22 +9,22 @@
     state: present
 
 - name: get catalogue entries count
-  ansible.builtin.command: mongo --host mongodb.aws-devops.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
+  ansible.builtin.command: mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
   register: products_count 
   when: component == "catalogue"
 
 - name: get user entries count
-  ansible.builtin.command: mongo --host mongodb.aws-devops.online --quiet --eval 'db = db.getSiblingDB("user"); db.products.count()'
+  ansible.builtin.command: mongo --host {{MONGODB_HOST}} --quiet --eval 'db = db.getSiblingDB("user"); db.products.count()'
   register: users_count 
   when: component == "user"  
 
 - name: "load catalogue data"
-  ansible.builtin.shell: "mongo --host mongodb.aws-devops.online < /app/schema/catalogue.js"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/catalogue.js"
   when:  component == "catalogue" and products_count.stdout == "0" 
   # ignore_errors: true
 
 - name: "load user data"
-  ansible.builtin.shell: "mongo --host mongodb.aws-devops.online < /app/schema/user.js"
+  ansible.builtin.shell: "mongo --host {{MONGODB_HOST}} < /app/schema/user.js"
   when: component == "user" and users_count.stdout == "0"  
   # ignore_errors: true
 
