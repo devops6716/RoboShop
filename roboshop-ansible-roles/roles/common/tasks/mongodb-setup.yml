@@ -19,9 +19,11 @@
   when: component == "user"  
 
 - name: "load {{component}} data"
-  ansible.builtin.command: "mongo --host mongodb.aws-devops.online < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host mongodb.aws-devops.online < /app/schema/{{component}}.js"
   when: products_count.stdout == "0" And component == "catalogue"
+  ignore_errors: true
 
 - name: "load {{component}} data"
-  ansible.builtin.command: "mongo --host mongodb.aws-devops.online < /app/schema/{{component}}.js"
+  ansible.builtin.shell: "mongo --host mongodb.aws-devops.online < /app/schema/{{component}}.js"
   when: users_count.stdout == "0"  And component == "user"
+  ignore_errors: true
