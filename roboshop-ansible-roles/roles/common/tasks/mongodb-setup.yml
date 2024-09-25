@@ -28,6 +28,6 @@
   when: users_count.stdout == "0"  And component == "user"
   ignore_errors: true
 
- - name: get users_count
+- name: get users_count
   ansible.builtin.debug:
-    msg: "user count is : {{users_count}}" 
+  msg: "user count is : {{users_count}}" 
