@@ -8,16 +8,20 @@
     name: mongodb-org-shell
     state: present
 
-- name: get catalogue count
+- name: get catalogue entries count
   ansible.builtin.command: mongo --host mongodb.aws-devops.online --quiet --eval 'db = db.getSiblingDB("catalogue"); db.products.count()'
-  register: entries_count 
+  register: products_count 
   when: component == "catalogue"
 
-- name: get user count
+- name: get user entries count
   ansible.builtin.command: mongo --host mongodb.aws-devops.online --quiet --eval 'db = db.getSiblingDB("user"); db.products.count()'
-  register: entries_count 
+  register: users_count 
   when: component == "user"  
 
 - name: "load {{component}} data"
   ansible.builtin.command: "mongo --host mongodb.aws-devops.online < /app/schema/{{component}}.js"
-  when: entries_count.stdout == "0"
+  when: products_count.stdout == "0" And component == "catalogue"
+
+- name: "load {{component}} data"
+  ansible.builtin.command: "mongo --host mongodb.aws-devops.online < /app/schema/{{component}}.js"
+  when: users_count.stdout == "0"  And component == "user"
