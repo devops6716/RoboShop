@@ -30,4 +30,4 @@
 
 - name: get users_count
   ansible.builtin.debug:
-    msg: "user count is : {{uusers_count.stdout}}" 
+    msg: "user count is : {{users_count.stdout}}" 
