@@ -9,6 +9,6 @@
     chdir: /app
 
 - name: rename jar file 
-  command: "mv target/{{component}}-{{shipping_version}}.jar {{component}.jar"   
+  command: "mv target/{{component}}-{{shipping_version}}.jar {{component}}.jar"   
   args:
     chdir: /app        
