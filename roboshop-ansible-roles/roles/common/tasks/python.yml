@@ -1,0 +1,13 @@
+- name: install python packages
+  dnf:
+    name: "{{item}}"
+    state: present
+  loop:
+    - python36
+    - gcc  
+    - python3-devel
+
+- name: install dependencies
+  command: pip3.6 install -r requirements.txt  
+  args:
+    chdir: /app        
