@@ -1,0 +1,16 @@
+- name: app setup
+  import_role:
+    name: common
+    tasks_from: app-setup 
+
+- name: golang setup
+  import_role:
+    name: common
+    tasks_from: golang
+
+
+
+- name: service start
+  import_role:
+    name: common
+    tasks_from: systemd
